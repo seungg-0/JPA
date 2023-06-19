@@ -47,19 +47,44 @@ public class Book {
 		this.name = name;
 		this.pubDate = pubDate;
 	}
-
+	
+	private String author;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pub_date")
 	private Date pubDate;
 
-	public Book() {
+	public Book(String name, String author, Date pubDate) {
 		super();
+		this.name = name;
+		this.author = author;
+		this.pubDate = pubDate;
+	}
+	
+	// JPA에서는 별도의 UPDATE를 위한 메서드를 제공하지 않음
+	// UPDATE를 위한 메서드 이렇게 만들어줘야 함
+	// setName보다 이름 이렇게 명확하게 알 수 있도록 설정해주면 더 좋음
+	public void updateBookName(String name) {
+		this.name = name;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	// 기본 생성자에서만 사용되기 때문에
+	protected Book() {
+		super();
+		System.out.println("default counstructor called");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", pubDate=" + pubDate + "]";
+		return "Book [id=" + id + ", name=" + name + ", author=" + author + ", pubDate=" + pubDate + "]";
 	}
+
 
 }
