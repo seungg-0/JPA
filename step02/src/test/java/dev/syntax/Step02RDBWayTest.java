@@ -72,12 +72,15 @@ class Step02RDBWayTest {
 	@Test
 	void testDeleteEntity() { // 전공(연관관계) 제거
 		// 국문학과 제거
-		transaction.begin();
-		Student student = manager.find(Student.class, 1);
+		Student student = manager.find(Student.class, 5);
 		student.setMajor(null); // 다른과로 가세요 !
-		
-		Major major = manager.find(Major.class, 4);
+		System.out.println("~~~");
+		Student student1 = manager.find(Student.class, 6);
+//		student1.setMajor(1123456456456); // 다른과로 가세요 !
+		Major major = manager.find(Major.class, 3);
 		manager.remove(major);
+		transaction.begin();
+		
 		
 		transaction.commit();
 		
